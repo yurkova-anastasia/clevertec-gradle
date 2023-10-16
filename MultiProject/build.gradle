@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'custom-plugin'
+}
+ext {
+    userName = "Anastasia"
+}
+
+version '1.0'
+
+allprojects {
+    group 'ru.clevertec'
+}
+
+jar {
+    manifest {
+        attributes('Name': project.name, 'Version': project.version)
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+build {
+    dependsOn 'taskInCustomPlugin'
+}
+
+
+
+
+
+
